@@ -4,6 +4,14 @@
   "description": "Advanced file operations library with search, type detection, size calculation, and permission utilities",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arsh342/filesops.git"
+  },
+  "homepage": "https://github.com/arsh342/filesops#readme",
+  "bugs": {
+    "url": "https://github.com/arsh342/filesops/issues"
+  },
   "scripts": {
     "build": "tsc",
     "test": "jest",
@@ -21,7 +29,7 @@
     "file-size",
     "utilities"
   ],
-  "author": "",
+  "author": "arsh342",
   "license": "MIT",
   "devDependencies": {
     "@types/node": "^20.0.0",
