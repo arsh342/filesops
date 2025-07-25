@@ -262,6 +262,34 @@ summary.forEach(({ path, permissions, accessible }) => {
 - Node.js 14.0.0 or higher
 - TypeScript 5.0.0 or higher (for TypeScript projects)
 
+## Development
+
+### Setup
+```bash
+# Clone the repository
+git clone https://github.com/arsh342/filesops.git
+cd filesops
+
+# Install dependencies (use npm ci for exact versions)
+npm ci
+
+# Build the project
+npm run build
+
+# Run tests
+npm test
+
+# Run development mode (watch for changes)
+npm run dev
+```
+
+### CI/CD
+The project includes GitHub Actions workflows for automated testing and publishing. The CI process:
+1. Runs `npm ci` for exact dependency installation
+2. Builds the TypeScript project
+3. Runs the full test suite
+4. Publishes to NPM on successful builds to main branch
+
 ## License
 
 MIT
