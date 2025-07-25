@@ -1,0 +1,65 @@
+name: Publish to NPM
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'  # Only run on version tags like v1.0.3
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Use Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18.x'
+        registry-url: 'https://registry.npmjs.org'
+    
+    - name: Install dependencies
+      run: npm ci
+    
+    - name: Run tests
+      run: npm test
+    
+    - name: Build
+      run: npm run build
+    
+    - name: Extract version from tag
+      id: get-version
+      run: |
+        VERSION=${GITHUB_REF#refs/tags/v}
+        echo "version=$VERSION" >> $GITHUB_OUTPUT
+        echo "Publishing version: $VERSION"
+    
+    - name: Verify package.json version matches tag
+      run: |
+        PACKAGE_VERSION=$(node -p "require('./package.json').version")
+        TAG_VERSION="${{ steps.get-version.outputs.version }}"
+        if [ "$PACKAGE_VERSION" != "$TAG_VERSION" ]; then
+          echo "Error: package.json version ($PACKAGE_VERSION) doesn't match tag version ($TAG_VERSION)"
+          exit 1
+        fi
+        echo "Version verification passed: $PACKAGE_VERSION"
+    
+    - name: Publish to NPM
+      run: npm publish --access public
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+    
+    - name: Create GitHub Release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: Release ${{ steps.get-version.outputs.version }}
+        body: |
+          Release notes for version ${{ steps.get-version.outputs.version }}
+          
+          See [CHANGELOG.md](./CHANGELOG.md) for details.
+        draft: false
+        prerelease: false
