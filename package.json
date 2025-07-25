@@ -1,0 +1,39 @@
+{
+  "name": "filesops",
+  "version": "1.0.0",
+  "description": "Advanced file operations library with search, type detection, size calculation, and permission utilities",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "dev": "tsc --watch",
+    "lint": "echo 'Linting not configured yet'",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "files",
+    "file-operations",
+    "file-search",
+    "file-type",
+    "permissions",
+    "file-size",
+    "utilities"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/jest": "^29.0.0",
+    "jest": "^29.0.0",
+    "ts-jest": "^29.0.0",
+    "typescript": "^5.0.0"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "files": [
+    "dist"
+  ]
+}
