@@ -1,0 +1,49 @@
+name: Debug CI
+
+on:
+  workflow_dispatch:  # Manual trigger for debugging
+
+jobs:
+  debug:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+    
+    - name: Debug environment
+      run: |
+        echo "=== Environment Info ==="
+        node --version
+        npm --version
+        echo "=== Package.json info ==="
+        cat package.json | head -20
+        echo "=== Directory contents ==="
+        ls -la
+        
+    - name: Try npm install first
+      run: |
+        echo "=== Running npm install ==="
+        npm install
+        echo "=== npm install completed ==="
+        
+    - name: Try npm ci
+      run: |
+        echo "=== Running npm ci ==="
+        rm -rf node_modules
+        npm ci
+        echo "=== npm ci completed ==="
+        
+    - name: Verify installation
+      run: |
+        echo "=== Verifying installation ==="
+        npm list --depth=0
+        echo "=== Build test ==="
+        npm run build
+        echo "=== Test run ==="
+        npm test
