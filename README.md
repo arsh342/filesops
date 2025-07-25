@@ -179,7 +179,7 @@ interface PermissionInfo {
 The package also provides convenient utility functions for common operations:
 
 ```typescript
-import { filesops } from 'filesops';
+import * as filesops from 'filesops/filesops';
 
 // Get comprehensive file information
 const info = await filesops.getFileInfo('./file.txt');
@@ -189,20 +189,16 @@ const largeImages = await filesops.findByTypeAndSize('./photos', 'Image', 1024 *
 
 // Get disk usage summary
 const usage = await filesops.getDiskUsage('./project');
+```
 
-// Find files to cleanup
-const oldFiles = await filesops.findFilesToCleanup('./temp', {
-  olderThan: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000) // 30 days ago
-});
+Alternatively, you can import utility functions directly:
 
-// Check directory access
-const access = await filesops.checkDirectoryAccess('./uploads');
+```typescript
+import { getFileInfo, getDiskUsage, findByTypeAndSize } from 'filesops/filesops';
 
-// Find duplicate files by size
-const duplicates = await filesops.findDuplicatesBySize('./documents');
-
-// Get file system overview
-const overview = await filesops.getFileSystemOverview('./project');
+// Use functions directly
+const info = await getFileInfo('./file.txt');
+const usage = await getDiskUsage('./project');
 ```
 
 ## Examples

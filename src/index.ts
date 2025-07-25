@@ -14,5 +14,5 @@ export type {
   SizeInfo,
 } from './types';
 
-// Convenience functions
-export * as filesops from './utils';
+// Utility functions (import separately if needed)
+// import * as filesops from 'filesops/filesops';

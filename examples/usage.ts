@@ -5,7 +5,8 @@
  * Run with: npx ts-node examples/usage.ts
  */
 
-import { FileSearch, FileTypeDetector, SizeCalculator, PermissionChecker, filesops } from '../src';
+import { FileSearch, FileTypeDetector, SizeCalculator, PermissionChecker } from '../src';
+import * as filesops from '../src/filesops';
 
 async function main() {
   console.log('🔍 filesops Library Examples\n');
