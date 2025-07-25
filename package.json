@@ -1,6 +1,6 @@
 {
   "name": "filesops",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Advanced file operations library with search, type detection, size calculation, and permission utilities",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
